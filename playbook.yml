@@ -1,0 +1,17 @@
+---
+- name: Install and restart Nginx
+  hosts: all
+  become: true  # This allows the playbook to run as root
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes  # Ensure the package index is up to date
+
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
